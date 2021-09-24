@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --experimental-specifier-resolution=node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "latest",
+    "concurrently": "latest",
+    "config": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "morgan": "latest",
+    "node-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "latest",
+    "babel-core": "latest",
+    "babel-preset-env": "latest",
+    "morgan": "latest",
+    "nodemon": "latest"
+  }
+}
