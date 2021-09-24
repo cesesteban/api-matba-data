@@ -1,7 +1,1 @@
 PORT=5000//or anyone
-ACCESS_TOKEN=Access Token MP
-SUCCESS=url web success
-FAILURE=url web failure
-PENDING=url web pending
-USER=user email
-PASS=password email
