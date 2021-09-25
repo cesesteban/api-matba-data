@@ -1,25 +1,21 @@
 import jsRofex from 'rofexjs/jsRofex';
 import config from '../config/index.js';
-import logger from '../logger/bunyan';
+//import logger from '../logger/bunyan';
 
-const { USER, PASSWORD } = config.server;
+const { USER, PASSWORD } = config.login;
 
 class matbaService {
-  static async login() {
+  static login() {
     try {
       jsRofex.login((user = USER), (password = PASSWORD), function (rta) {
-        if (rta.status == 'OK') {
-          console.log('Connected Successfully');
-        } else {
-          console.log('Error in login process');
-          console.log(rta);
-        }
+        return { messaje: 'Connected Successfully' };
       });
-    } catch {
-      logger.error(
-        `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`
-      );
-      throw { Error: error.name, Message: error.message };
+    } catch (error) {
+      //   logger.error(`Error: ${error.name} ${error.message}`);
+      //   res
+      //     .status(error.status)
+      //     .json({ error: error.name, message: error.message });
+      res.status(400).json({ error: error, message: error });
     }
   }
 }

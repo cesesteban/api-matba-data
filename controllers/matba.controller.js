@@ -1,4 +1,4 @@
-import logger from '../logger/bunyan';
+//import logger from '../logger/bunyan';
 import matbaService from '../services/matba.service';
 
 class matbaController {
@@ -7,10 +7,8 @@ class matbaController {
       const response = await matbaService.login();
       res.status(200).json({ success: true, data: response });
     } catch (error) {
-      logger.error(`Error: ${error.name} ${error.message}`);
-      res
-        .status(error.status)
-        .json({ error: error.name, message: error.message });
+      //logger.error(`Error: ${error.name} ${error.message}`);
+      res.status(400).json({ error: error, message: error });
     }
   }
 }
