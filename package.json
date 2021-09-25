@@ -17,8 +17,10 @@
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "logger": "^0.0.1",
     "morgan": "latest",
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^3.0.0",
+    "rofex": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "latest",
