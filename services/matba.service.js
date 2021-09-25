@@ -1,11 +1,13 @@
-var jsRofex = require('rofexjs');
+import jsRofex from 'rofexjs/jsRofex';
+import config from '../config/index.js';
+import logger from '../logger/bunyan';
 
-var fes = new jsRofex('reMarkets');
+const { USER, PASSWORD } = config.server;
 
 class matbaService {
-  static async login(data) {
+  static async login() {
     try {
-      fes.login((user = data.user), (password = data.password), function (rta) {
+      jsRofex.login((user = USER), (password = PASSWORD), function (rta) {
         if (rta.status == 'OK') {
           console.log('Connected Successfully');
         } else {

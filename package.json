@@ -5,22 +5,22 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-specifier-resolution=node server.js",
+    "start": "nodemon --experimental-specifier-resolution=node server.js | bunyan -o short",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "latest",
+    "bunyan": "^1.8.15",
     "concurrently": "latest",
     "config": "latest",
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
-    "logger": "^0.0.1",
     "morgan": "latest",
     "node-fetch": "^3.0.0",
-    "rofex": "^1.0.5"
+    "rofexjs": "^1.1.4"
   },
   "devDependencies": {
     "babel-cli": "latest",

@@ -4,7 +4,7 @@ import matbaService from '../services/matba.service';
 class matbaController {
   static async login(req, res) {
     try {
-      const response = await matbaService.login(req.body);
+      const response = await matbaService.login();
       res.status(200).json({ success: true, data: response });
     } catch (error) {
       logger.error(`Error: ${error.name} ${error.message}`);

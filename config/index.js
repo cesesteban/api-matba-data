@@ -6,6 +6,10 @@ const config = {
   server: {
     PORT: process.env.PORT,
   },
+  login: {
+    USER: process.env.USER,
+    PASSWORD: process.env.PASSWORD,
+  },
 };
 
 export default config;
