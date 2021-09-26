@@ -5,17 +5,25 @@ import config from '../config/index.js';
 const { USER, PASSWORD } = config.login;
 
 class matbaService {
-  static login() {
+  static async login() {
     try {
-      jsRofex.login((user = USER), (password = PASSWORD), function (rta) {
-        return { messaje: 'Connected Successfully' };
+      const rofex = new jsRofex('reMarkets');
+      const response = await new Promise((succes, failure) => {
+        rofex.login(USER, PASSWORD, function (res) {
+          if (res.status == 'OK') {
+            console.log('Connected Successfully');
+            succes('Connected Successfully');
+            return;
+          } else {
+            console.log('Error in login process');
+            failure('Error in login process');
+          }
+        });
       });
+      return { message: response };
     } catch (error) {
-      //   logger.error(`Error: ${error.name} ${error.message}`);
-      //   res
-      //     .status(error.status)
-      //     .json({ error: error.name, message: error.message });
-      res.status(400).json({ error: error, message: error });
+      console.log(error);
+      return { message: error };
     }
   }
 }
