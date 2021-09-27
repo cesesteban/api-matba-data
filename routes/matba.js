@@ -6,5 +6,6 @@ router.get('/login', matbaController.login);
 router.get('/instruments', matbaController.instruments);
 router.get('/instruments/details', matbaController.instrumentsDetails);
 router.get('/instrument/details', matbaController.instrumentDetails);
+router.get('/instrument/history', matbaController.instrumentHistory);
 
 export default router;
