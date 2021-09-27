@@ -4,10 +4,10 @@ import config from '../config/index.js';
 
 const { USER, PASSWORD } = config.login;
 
+const rofex = new jsRofex('reMarkets');
 class matbaService {
   static async login() {
     try {
-      const rofex = new jsRofex('reMarkets');
       const response = await new Promise((succes, failure) => {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
@@ -22,7 +22,32 @@ class matbaService {
       });
       return { message: response };
     } catch (error) {
-      console.log(error);
+      return { message: error };
+    }
+  }
+  static async instruments() {
+    try {
+      const response = await new Promise((succes, failure) => {
+        rofex.login(USER, PASSWORD, function (res) {
+          if (res.status == 'OK') {
+            console.log('Connected Successfully');
+            rofex.get_instruments('securities', false, function (data_get) {
+              if (JSON.parse(data_get).status == 'OK') {
+                console.log(data_get);
+                succes(JSON.parse(data_get));
+              } else {
+                console.log('Error:');
+                failure(data_get);
+              }
+            });
+            return;
+          } else {
+            console.log('Error in login process');
+          }
+        });
+      });
+      return response;
+    } catch (error) {
       return { message: error };
     }
   }
