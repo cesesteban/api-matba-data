@@ -1,6 +1,5 @@
 import jsRofex from 'rofexjs/jsRofex';
 import config from '../config/index.js';
-//import logger from '../logger/bunyan';
 
 const { USER, PASSWORD } = config.login;
 
@@ -11,18 +10,18 @@ class matbaService {
       const response = await new Promise((succes, failure) => {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
-            console.log('Connected Successfully');
-            succes('Connected Successfully');
+            console.log({ status: 'OK', message: 'Connected Successfully' });
+            succes({ status: 'OK', message: 'Connected Successfully' });
             return;
           } else {
-            console.log('Error in login process');
-            failure('Error in login process');
+            console.log({ status: 'ERROR', message: 'Error in login process' });
+            failure({ status: 'ERROR', message: 'Error in login process' });
           }
         });
       });
-      return { message: response };
+      return response;
     } catch (error) {
-      return { message: error };
+      res.status(400).json({ error: error, message: error });
     }
   }
   static async instruments() {
@@ -30,7 +29,7 @@ class matbaService {
       const response = await new Promise((succes, failure) => {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
-            console.log('Connected Successfully');
+            console.log({ status: 'OK', message: 'Connected Successfully' });
             rofex.get_instruments('securities', false, function (data_get) {
               if (JSON.parse(data_get).status == 'OK') {
                 console.log(data_get);
@@ -42,13 +41,13 @@ class matbaService {
             });
             return;
           } else {
-            console.log('Error in login process');
+            console.log({ status: 'ERROR', message: 'Error in login process' });
           }
         });
       });
       return response;
     } catch (error) {
-      return { message: error };
+      res.status(400).json({ error: error, message: error });
     }
   }
   static async instrumentsDetails() {
@@ -56,7 +55,7 @@ class matbaService {
       const response = await new Promise((succes, failure) => {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
-            console.log('Connected Successfully');
+            console.log({ status: 'OK', message: 'Connected Successfully' });
             rofex.get_instruments('securities', true, function (data_get) {
               if (JSON.parse(data_get).status == 'OK') {
                 console.log(data_get);
@@ -68,13 +67,46 @@ class matbaService {
             });
             return;
           } else {
-            console.log('Error in login process');
+            console.log({ status: 'ERROR', message: 'Error in login process' });
           }
         });
       });
       return response;
     } catch (error) {
-      return { message: error };
+      res.status(400).json({ error: error, message: error });
+    }
+  }
+  static async instrumentDetails(req, res) {
+    try {
+      const response = await new Promise((succes, failure) => {
+        rofex.login(USER, PASSWORD, function (res) {
+          if (res.status == 'OK') {
+            console.log({ status: 'OK', message: 'Connected Successfully' });
+            rofex.get_market_data(
+              req.body.market_id,
+              req.body.symbol,
+              req.body.entries,
+              req.body.depth,
+              function (data_get) {
+                if (JSON.parse(data_get).status == 'OK') {
+                  console.log(data_get);
+                  succes(JSON.parse(data_get));
+                } else {
+                  console.log('Error:');
+                  console.log(data_get);
+                  failure(JSON.parse(data_get));
+                }
+              }
+            );
+            return;
+          } else {
+            console.log({ status: 'ERROR', message: 'Error in login process' });
+          }
+        });
+      });
+      return response;
+    } catch (error) {
+      res.status(400).json({ error: error, message: error });
     }
   }
 }
