@@ -132,22 +132,6 @@ class matbaService {
                 }
               }
             );
-            // rofex.get_market_data(
-            //   req.body.market_id,
-            //   req.body.symbol,
-            //   req.body.entries,
-            //   req.body.depth,
-            //   function (data_get) {
-            //     if (JSON.parse(data_get).status == 'OK') {
-            //       console.log(data_get);
-            //       succes(JSON.parse(data_get));
-            //     } else {
-            //       console.log('Error:');
-            //       console.log(data_get);
-            //       failure(JSON.parse(data_get));
-            //     }
-            //   }
-            // );
             return;
           } else {
             console.log({ status: 'ERROR', message: 'Error in login process' });
