@@ -21,7 +21,7 @@ class matbaService {
       });
       return response;
     } catch (error) {
-      res.status(400).json({ error: error, message: error });
+      return error;
     }
   }
   static async instruments() {
@@ -47,7 +47,7 @@ class matbaService {
       });
       return response;
     } catch (error) {
-      res.status(400).json({ error: error, message: error });
+      return error;
     }
   }
   static async instrumentsDetails() {
@@ -73,7 +73,7 @@ class matbaService {
       });
       return response;
     } catch (error) {
-      res.status(400).json({ error: error, message: error });
+      return error;
     }
   }
   static async instrumentDetails(req, res) {
@@ -106,7 +106,7 @@ class matbaService {
       });
       return response;
     } catch (error) {
-      res.status(400).json({ error: error, message: error });
+      return error;
     }
   }
 }
