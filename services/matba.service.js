@@ -149,12 +149,13 @@ class matbaService {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
             console.log({ status: 'OK', message: 'Connected Successfully' });
+            var todayDate = new Date().toISOString().slice(0, 10);
             rofex.get_trade_history(
               req.body.market_id,
               req.body.symbol,
-              req.body.date_query,
-              req.body.date_from,
-              req.body.date_to,
+              todayDate,
+              '',
+              '',
               function (data_get) {
                 if (JSON.parse(data_get).status == 'OK') {
                   const res = JSON.parse(data_get).trades;
@@ -215,8 +216,6 @@ class matbaService {
             var monthly = todayDate.split('-')[1] - 1;
             var monthlyDate =
               monthlyAux[0] + '-' + monthly + '-' + monthlyAux[2];
-            console.log(todayDate);
-            console.log(monthlyDate);
             rofex.get_trade_history(
               req.body.market_id,
               req.body.symbol,
