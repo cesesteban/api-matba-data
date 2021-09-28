@@ -7,5 +7,7 @@ router.get('/instruments', matbaController.instruments);
 router.get('/instruments/details', matbaController.instrumentsDetails);
 router.get('/instrument/details', matbaController.instrumentDetails);
 router.get('/instrument/history', matbaController.instrumentHistory);
+router.get('/instrument/intraday', matbaController.instrumentIntraday);
+router.get('/instrument/monthly', matbaController.instrumentMonthly);
 
 export default router;
