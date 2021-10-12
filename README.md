@@ -1,18 +1,6 @@
 # API-MATBA-DATA
 
-## Quick Start
-
-# Install dependencies for server
-
-npm install
-
-# Run the Express server only
-
-npm start
-
-# Server runs on http://localhost:5000
-
-```
+## [GET-METHODS]
 
 ### Author
 
@@ -21,4 +9,3 @@ cesesteban
 ### Version
 
 1.0.0
-```
