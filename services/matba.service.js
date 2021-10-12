@@ -123,8 +123,36 @@ class matbaService {
               req.body.date_to,
               function (data_get) {
                 if (JSON.parse(data_get).status == 'OK') {
-                  console.log(data_get);
-                  succes(JSON.parse(data_get));
+                  const res = JSON.parse(data_get).trades;
+                  const dataDay = [res[0]];
+                  res.forEach((data) => {
+                    const timeValidateDay = data.datetime
+                      .split(' ')[0]
+                      .split('-')[2];
+                    const timeValidateDayAux = dataDay[
+                      dataDay.length - 1
+                    ].datetime
+                      .split(' ')[0]
+                      .split('-')[2];
+                    const timeValidateMonthly = data.datetime
+                      .split(' ')[0]
+                      .split('-')[1];
+                    const timeValidateMonthlyAux = dataDay[
+                      dataDay.length - 1
+                    ].datetime
+                      .split(' ')[0]
+                      .split('-')[1];
+                    if (
+                      (!dataDay.includes(data) &&
+                        timeValidateDay > timeValidateDayAux) ||
+                      timeValidateMonthly !== timeValidateMonthlyAux
+                    ) {
+                      dataDay.push(data);
+                    }
+                  });
+
+                  console.log(dataDay);
+                  succes(dataDay);
                 } else {
                   console.log('Error:');
                   console.log(data_get);
@@ -178,9 +206,9 @@ class matbaService {
                       .split(' ')[1]
                       .split(':')[0];
                     if (
-                      !dataMin.includes(data) &&
-                      timeValidateHourData === timeValidateHourAux &&
-                      timeValidateMinData > timeValidateMinAux
+                      (!dataMin.includes(data) &&
+                        timeValidateMinData > timeValidateMinAux) ||
+                      timeValidateHourData !== timeValidateHourAux
                     ) {
                       dataMin.push(data);
                     }
@@ -205,45 +233,64 @@ class matbaService {
       return error;
     }
   }
-  static async instrumentMonthly(req, res) {
+  static async instrumentQuarter(req, res) {
     try {
       const response = await new Promise((succes, failure) => {
         rofex.login(USER, PASSWORD, function (res) {
           if (res.status == 'OK') {
             console.log({ status: 'OK', message: 'Connected Successfully' });
             var todayDate = new Date().toISOString().slice(0, 10);
-            var monthlyAux = todayDate.split('-');
-            var monthly = todayDate.split('-')[1] - 1;
-            var monthlyDate =
-              monthlyAux[0] + '-' + monthly + '-' + monthlyAux[2];
+            var quarterAux = todayDate.split('-');
+            var quarter =
+              todayDate.split('-')[1] === 4
+                ? 12
+                : todayDate.split('-')[1] === 3
+                ? 11
+                : todayDate.split('-')[1] === 2
+                ? 10
+                : todayDate.split('-')[1] === 1
+                ? 9
+                : todayDate.split('-')[1] - 4;
+            var quarterDate =
+              quarterAux[0] + '-' + quarter + '-' + quarterAux[2];
             rofex.get_trade_history(
               req.body.market_id,
               req.body.symbol,
               '',
-              monthlyDate,
+              quarterDate,
               todayDate,
               function (data_get) {
                 if (JSON.parse(data_get).status == 'OK') {
                   const res = JSON.parse(data_get).trades;
-                  const dataMonthly = [res[0]];
+                  const dataDay = [res[0]];
                   res.forEach((data) => {
-                    const timeValidateHourData = data.datetime
-                      .split(' ')[1]
-                      .split(':')[0];
-                    const timeValidateHourAux = dataMonthly[
-                      dataMonthly.length - 1
+                    const timeValidateDay = data.datetime
+                      .split(' ')[0]
+                      .split('-')[2];
+                    const timeValidateDayAux = dataDay[
+                      dataDay.length - 1
                     ].datetime
-                      .split(' ')[1]
-                      .split(':')[0];
+                      .split(' ')[0]
+                      .split('-')[2];
+                    const timeValidateMonthly = data.datetime
+                      .split(' ')[0]
+                      .split('-')[1];
+                    const timeValidateMonthlyAux = dataDay[
+                      dataDay.length - 1
+                    ].datetime
+                      .split(' ')[0]
+                      .split('-')[1];
                     if (
-                      !dataMonthly.includes(data) &&
-                      timeValidateHourData != timeValidateHourAux
+                      (!dataDay.includes(data) &&
+                        timeValidateDay > timeValidateDayAux) ||
+                      timeValidateMonthly !== timeValidateMonthlyAux
                     ) {
-                      dataMonthly.push(data);
+                      dataDay.push(data);
                     }
                   });
-                  console.log(dataMonthly);
-                  succes(dataMonthly);
+
+                  console.log(dataDay);
+                  succes(dataDay);
                 } else {
                   console.log('Error:');
                   console.log(data_get);

@@ -49,9 +49,9 @@ class matbaController {
       res.status(400).json({ error: error, message: error });
     }
   }
-  static async instrumentMonthly(req, res) {
+  static async instrumentQuarter(req, res) {
     try {
-      const response = await matbaService.instrumentMonthly(req);
+      const response = await matbaService.instrumentQuarter(req);
       res.status(200).json({ success: true, data: response });
     } catch (error) {
       res.status(400).json({ error: error, message: error });
