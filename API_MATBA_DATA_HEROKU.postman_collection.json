@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "ee1df601-31a8-4f93-992b-83cd0e0ec724",
+		"name": "API_MATBA_DATA_HEROKU",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api-matba-data.herokuapp.com/matba/instrument/intraday",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"market_id\" : \"ROFX\", \r\n    \"symbol\" : \"GGAL/OCT21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-matba-data.herokuapp.com/matba/instrument/intraday",
+					"protocol": "https",
+					"host": [
+						"api-matba-data",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"matba",
+						"instrument",
+						"intraday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-matba-data.herokuapp.com/matba/instruments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-matba-data.herokuapp.com/matba/instruments",
+					"protocol": "https",
+					"host": [
+						"api-matba-data",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"matba",
+						"instruments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-matba-data.herokuapp.com/matba/instrument/quarter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"market_id\" : \"ROFX\", \r\n    \"symbol\" : \"GGAL/OCT21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-matba-data.herokuapp.com/matba/instrument/quarter",
+					"protocol": "https",
+					"host": [
+						"api-matba-data",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"matba",
+						"instrument",
+						"quarter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-matba-data.herokuapp.com/matba/instrument/history",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"market_id\" : \"ROFX\", \r\n    \"symbol\" : \"GGAL/OCT21\", \r\n    \"date_query\" : \"\", \r\n    \"date_from\" : \"2021-06-27\", \r\n    \"date_to\" : \"2021-08-27\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-matba-data.herokuapp.com/matba/instrument/history",
+					"protocol": "https",
+					"host": [
+						"api-matba-data",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"matba",
+						"instrument",
+						"history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
